@@ -1,0 +1,57 @@
+<!--
+4107056019 廖柏丞 第一次作業 10/6
+4107056019 Bocheng Liao The First Homework 10/6
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>意見調查 :: 中興大學</title>
+    </head>
+    <body>
+        <nav>
+            <a href="./index.html">回首頁</a> |
+            <a href="./intro/index.html">認識興大</a> |
+            <a href="./academic/index.html">學院</a> |
+            <a href="./maps.html">網站地圖</a> |
+            <a href="./entrance/index.html">興大入口</a> |
+            <a href="./opinion.html">意見調查</a> |
+            <a href="./opinion-en.html">English</a>
+        </nav>
+        <h1>意見調查</h1>
+        <section>
+            <p>作答進度：<meter min="0" max="6" value="2">2</meter></p>
+            <form>
+                <fieldset>
+                    <legend>基本資料</legend>
+                    <p>暱稱：<input type="text"></p>
+                    <p>Email：<input type="email"></p>
+                </fieldset>
+                <fieldset>
+                    <legend>網站體驗</legend>
+                    <p>網站體驗度：<input type="number" min="1" max="5" step="1"></p>
+                    <p>網站背景顏色建議：<input type="color"></p>
+                    <p>網站配色：
+                        <!--預設選擇深色 同一個 nmae 代表同一組 radio button-->
+                        <input type="radio" id="dark" value="dark" name="background-theme" checked><label for="dark">深色</label>
+                        <input type="radio" id="bright" value="bright" name="background-theme"><label for="bright">亮色</label>
+                    </p>
+                    <p>最喜歡哪一個網站：<input type="url"></p>
+                </fieldset>
+                <fieldset>
+                    <legend>其他保貴意見</legend>
+                    <textarea name="main" rows="8" cols="80"></textarea>
+                </fieldset>
+                <p><input type="submit" value="送出"> <input type="reset" value="清空"></p>
+            </form>
+        </section>
+        <hr>
+        <footer>
+            <p>Copyright © National Chung Hsing University</p>
+            <p>版權所有 國立中興大學全球資訊網</p>
+            <address><p>402 台中市南區興大路145號</p>
+            <p>Tel : 04-22873181 | Email: <a href="mailto:justice@nchu.edu.tw" title="justice@nchu.edu.tw">justice@nchu.edu.tw</a></p>
+            </address>
+        </footer>
+    </body>
+</html>

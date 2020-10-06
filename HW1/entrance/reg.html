@@ -1,0 +1,57 @@
+<!--
+4107056019 廖柏丞 第一次作業 10/6
+4107056019 Bocheng Liao The First Homework 10/6
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>註冊 :: 興大入口 :: 國立中興大學</title>
+    </head>
+    <body>
+        <nav>
+            <a href="../index.html">回首頁</a> |
+            <a href="../intro/index.html">認識興大</a> |
+            <a href="../academic/index.html">學院</a> |
+            <a href="../maps.html">網站地圖</a> |
+            <a href="../entrance/index.html">興大入口</a> |
+            <a href="../opinion.html">意見調查</a> |
+            <a href="./reg-en.html">English</a>
+        </nav>
+        <h1>校友註冊</h1>
+        <p>請填妥下列表單即可申請使用服務</p>
+        <section>
+            <form>
+                <p><label for="name">姓名：</label><input id="name" type="text" placeholder=""></p>
+                <p><label for="student-id">學號：</label><input id="student-id" type="text" placeholder=""></p>
+                <p><label for="birthday">生日：</label><input id="birthday" type="date"></p>
+                <p>學制：
+                    <select>
+                        <option>大學</option>
+                        <option>夜間部</option>
+                        <option>研究所</option>
+                    </select>
+                </p>
+                <p><label for="email">電子郵件：</label><input id="email" type="email" placeholder="example@nchu.edu.tw"></p>
+                <p><label for="tel">手機：</label><input id="tel" type="tel" placeholder="09xx-xxx-xxx"></p>
+                <p><label for="pwd">密碼：</label><input id="pwd" type="password" placeholder="6-20字且含有英文數字"></p>
+                <p><label for="confirm-pwd">確認密碼：</label><input id="confirm-pwd" type="password" placeholder="6-20字且含有英文數字"></p>
+                <p><label for="department">原系所：</label><input id="department" type="text" list="depart-list"></p>
+                <datalist id="depart-list">
+                    <option>大資訊工程系</option>
+                    <option>園藝學系</option>
+                    <option>食品暨應用生物科技學系</option>
+                    <option>其他</option>
+                </datalist>
+                <p><input type="submit" value="送出"> <input type="reset" value="清空"></p>
+            </form>
+        </section>
+        <hr>
+        <footer>
+            <p>Copyright © National Chung Hsing University</p>
+            <p>版權所有 國立中興大學全球資訊網</p>
+            <address><p>402 台中市南區興大路145號</p>
+            <p>Tel : 04-22873181 | Email: <a href="mailto:justice@nchu.edu.tw" title="justice@nchu.edu.tw">justice@nchu.edu.tw</a></p>
+        </address></footer>
+    </body>
+</html>

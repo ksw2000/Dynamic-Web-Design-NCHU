@@ -1,0 +1,128 @@
+<!--
+4107056019 廖柏丞 第一次作業 10/6
+4107056019 Bocheng Liao The First Homework 10/6
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>國立中興大學 - 國立中興大學(National Chung Hsing University)</title>
+        <meta name="keywords" content="NCHU, 中興大學, 興大, 國立中興大學,中興" />
+        <meta name="description" content="國立中興大學,位於臺中市南區，占地約53公頃，更是中部區網中心,扭轉中部地區網路。
+設有文學院、農業暨自然資源學院、 理學院、工學院、生命科學院、獸醫學院、管理學院及法政學院。
+除校區外，另有四處實驗林場：文山林場（新北市）、惠蓀林場（南投縣）、東勢林場（臺中市）、新化林場（臺南市）。
+還有實習農場（臺中市霧峰區）、畜產試驗場（臺中市烏日區）及園藝試驗場高冷地分場（南投縣仁愛鄉）。"/>
+    </head>
+    <body>
+        <nav>
+            <!--
+                如果可以用 css
+                navbar 宜改用 ul - li
+                做改寫
+            -->
+            <a href="./index.html">回首頁</a> |
+            <a href="./intro/index.html">認識興大</a> |
+            <a href="./academic/index.html">學院</a> |
+            <a href="./maps.html">網站地圖</a> |
+            <a href="./entrance/index.html">興大入口</a> |
+            <a href="./opinion.html">意見調查</a> |
+            <a href="./index-en.html">English</a>
+        </nav>
+        <!--
+            主畫面渲染宜使用 另一個通用元素做包裝
+            設定其 margin: 0px auto; 做水平置中
+            並且設定 width 和 max-width 達到 RWD
+        -->
+        <header>
+            <img alt="logo" src="logo.png" width="100%" height="auto">
+        </header>
+        <hr>
+        <form method="get" action="./index.html">
+            <input type="search" placeholder="搜尋關鍵字" size="100" name="q">
+            <input type="button" value="搜尋">
+            <!--
+                這裡可以綁定 ajax 不一定要用 submit，也可以不用在 <form> 裡
+                通常搜尋會用 HTTML GET 方法以參數 q 代表關鍵字傳送回伺服器端
+            -->
+        </form>
+        <hr>
+        <table>
+            <!--
+                利用 caption 做為 table 的說明
+            -->
+            <caption>10月行事曆</caption>
+            <thead>
+                <tr>
+                    <th>時間</th>
+                    <th>活動</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Oct1</td>
+                    <td>中秋節放假</td>
+                </tr>
+                <tr>
+                    <td>Oct2</td>
+                    <td>調整放假</td>
+                </tr>
+                <tr>
+                    <td>Oct5-16</td>
+                    <td>弱勢學生助學計畫助學金網路開放申請</td>
+                </tr>
+                <tr>
+                    <td>Oct5-20</td>
+                    <td>學士班應屆畢業生逕修讀博士學位申請</td>
+                </tr>
+                <tr>
+                    <td>Oct9-10</td>
+                    <td>國慶日補假</td>
+                </tr>
+                <tr>
+                    <td>Oct16</td>
+                    <td>加退選學分費開放繳費、課程退選截止</td>
+                </tr>
+                <tr>
+                    <td>Oct17</td>
+                    <td>上課達1/3 (第6週止)</td>
+                </tr>
+            <tbody>
+            <!--
+                chrome 會將 tfoot 放在 table 的開頭
+            -->
+            <tfoot>
+                <tr>
+                    <td colspan="2">&gt; 更多行事曆</td>
+                </tr>
+            </tfoot>
+        </table>
+        <hr>
+        <form method="get" action="./index.html">
+            <p>尋找行事曆：</p>
+            <!--
+                該屬性已經過時！所以不實作
+                <p><input type="datetime"></p>
+            -->
+            <p><input name="datetime" type="datetime-local"></p>
+            <p><input name="time" type="time"></p>
+            <p><input name="week" type="week"></p>
+            <input type="submit" value="查尋">
+        </form>
+        <hr>
+        <!--
+            結尾部分也宜採用置中
+            因為 center 是 html4 元素
+            所以先不使用
+            以 html5 的方式應該是採用
+            margin: 0px auto; 配上 text-align:center;
+            達到置中效果
+        -->
+        <footer>
+            <p>Copyright © National Chung Hsing University</p>
+            <p>版權所有 國立中興大學全球資訊網</p>
+            <address><p>402 台中市南區興大路145號</p>
+                <p>Tel : 04-22873181 | Email: <a href="mailto:justice@nchu.edu.tw" title="justice@nchu.edu.tw">justice@nchu.edu.tw</a></p>
+            </address>
+        </footer>
+    </body>
+</html>

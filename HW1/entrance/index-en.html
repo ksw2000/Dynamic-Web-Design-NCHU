@@ -1,0 +1,40 @@
+<!--
+4107056019 廖柏丞 第一次作業 10/6
+4107056019 Bocheng Liao The First Homework 10/6
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Login :: National Chung Hsing University</title>
+    </head>
+    <body>
+        <nav>
+            <a href="../index-en.html">Home</a> |
+            <a href="../intro/index-en.html">About</a> |
+            <a href="../academic/index-en.html">Colleges</a> |
+            <a href="../maps-en.html">Sitemaps</a> |
+            <a href="../entrance/index-en.html">Login</a> |
+            <a href="../opinion-en.html">Opinion Survey</a> |
+            <a href="./index.html">中文</a>
+        </nav>
+        <section>
+            <h1>Login</h1>
+            <form method="post" action="./index-en.html">
+                <p>Account ID：<input type="text" placeholder="ID" autofocus="autofocus" autocomplete="off"/></p>
+                <p>Password：<input type="password" placeholder="Password"/></p>
+                <!--In case of CSRF-->
+                <input type="hidden" name="token" value="tokentokentoken"/>
+                <p><input type="checkbox" id="keep-login"/><label for="keep-login">Keep logining</label></p>
+                <p><a href="./forget-pwd-en.html">Foret password</a> | <a href="./reg-en.html">Alumni Registration</a></p>
+                <div><input type="submit" value="Login"/></div>
+            </form>
+        </section>
+        <hr>
+        <footer>
+            <p>Copyright © National Chung Hsing University</p>
+            <address><p>145 Xingda Rd., South Dist., Taichung City 402, Taiwan (R.O.C.)</p>
+            <p>Tel : 04-22873181 | Email: <a href="mailto:justice@nchu.edu.tw" title="justice@nchu.edu.tw">justice@nchu.edu.tw</a></p>
+        </address></footer>
+    </body>
+</html>
