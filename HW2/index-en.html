@@ -1,0 +1,230 @@
+<!--
+4107056019 廖柏丞 第二次作業 10/28
+4107056019 Bocheng Liao The Second Homework 10/28
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>National Chung Hsing University</title>
+        <meta name="keywords" content="NCHU, National Chung Hsing University"/>
+        <link rel="stylesheet" type="text/css" href="./src/style/main.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--表單用-->
+<style>
+#search-box{
+    display: flex;
+}
+
+#search-box input[type="search"]{
+    border: 2px solid #ba8812;
+    background-color: transparent;
+    height: 30px;
+    line-height: 30px;
+    width: 100%;
+    padding: 0px 5px;
+}
+
+#search-box input:focus{
+    outline: none;
+}
+#search-box input[type="button"]{
+    border-width: 0px;
+    border-radius: 0px;
+    background: #ba8812;
+    color: #fff;
+}
+
+
+#main-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#main-box table{
+    width: 70%;
+    padding: 10px;
+}
+
+@media screen and (max-width: 750px){
+    #main-box{
+        flex-direction: column;
+    }
+
+    #main-box table{
+        width: 100%;
+    }
+
+    #main-box #search-calender{
+        width: 100%;
+    }
+}
+</style>
+
+<!--表格用-->
+<style>
+table caption{
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+th{
+    text-align: center;
+}
+
+thead tr{
+    background-color: #414141;
+    color: #ffb421;
+}
+
+tbody tr:nth-child(2n+1){
+    background-color: #d6d6d6;
+}
+
+tbody tr:nth-child(2n){
+    background-color: transparent;
+}
+
+#search-calender{
+    text-align: center;
+}
+
+#search-calender input{
+    border: 1px solid #4d4c4a;
+    background-color: transparent;
+    width: 100%;
+    max-width: 200px;
+}
+
+#banner{
+    background-image: url('./src/img/banner1.jpg');
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    margin: 10px 0px;
+    animation-name: slider;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    padding: 0px;
+}
+
+#banner img{
+    margin: 0px;
+    width: 100%;
+    visibility: hidden;
+    z-index: 6;
+}
+
+@keyframes slider{
+    0%   {background-image: url('./src/img/banner1.jpg');}
+    20%   {background-image: url('./src/img/banner1.jpg');}
+    25%  {background-image: url('./src/img/banner2.jpg');}
+    45%  {background-image: url('./src/img/banner2.jpg');}
+    50%  {background-image: url('./src/img/banner3.jpg');}
+    70%  {background-image: url('./src/img/banner3.jpg');}
+    75% {background-image: url('./src/img/banner4.jpg');}
+    95% {background-image: url('./src/img/banner4.jpg');}
+}
+</style>
+    </head>
+    <body>
+        <nav>
+            <div id="nav-main">
+                <ul>
+                    <li><a href="./index-en.html">Home</a></li>
+                    <li><a href="./about-en.html">About</a></li>
+                    <li><a href="./academic/index-en.html">Colleges<div class="arrow-down"></div></a>
+                        <ul>
+                            <li><a href="./academic/cla-en.html">College of Liberal Arts</a></li>
+                            <li><a href="./academic/canr-en.html">College of Agriculture and Natural Resources</a></li>
+                            <li><a href="./academic/scie-en.html">College of Science</a></li>
+                            <li><a href="./academic/engineer-en.html">College of Engineering</a></li>
+                            <li><a href="./academic/lifesci-en.html">College of Life Sciences</a></li>
+                            <li><a href="./academic/vmc-en.html">College of Veterinary Medicine</a></li>
+                            <li><a href="./academic/com-en.html">College of Management</a></li>
+                            <li><a href="./academic/clp-en.html">College of Law and Politics</a></li>
+                            <li><a href="./academic/eecs-en.html">College of Electrical Engineering and Computer Science</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="./maps-en.html">Sitemaps</a></li>
+                    <li><a href="./entrance/index-en.html">Login</a></li>
+                    <li><a href="./opinion-en.html">Opinion Survey</a></li>
+                    <li style="margin-left: auto;"><a href="./index.html">中文</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div id="wrapper">
+            <div id="banner">
+                <img src="./src/img/banner1.jpg">
+            </div>
+            <hr>
+            <form method="get" action="./index-en.html" id="search-box">
+                <input type="search" placeholder="Type keywords..." size="100" name="q">
+                <input type="button" value="search">
+            </form>
+            <hr>
+            <div id="main-box">
+                <table>
+                    <caption>October Calendar</caption>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Oct1</td>
+                            <td>Moon Festival</td>
+                        </tr>
+                        <tr>
+                            <td>Oct2</td>
+                            <td>Holiday Adjustment</td>
+                        </tr>
+                        <tr>
+                            <td>Oct5-16</td>
+                            <td>Financial Aid for Disadvantaged Students Program (FASP) Grant Online Open for App<wbr>lication</td>
+                        </tr>
+                        <tr>
+                            <td>Oct5-20</td>
+                            <td>Application for Doctoral Degrees for Undergraduate Graduates</td>
+                        </tr>
+                        <tr>
+                            <td>Oct9-10</td>
+                            <td>National Day Holiday</td>
+                        </tr>
+                        <tr>
+                            <td>Oct16</td>
+                            <td>Withdrawal Fee Open Payments and Course Withdrawal Deadline</td>
+                        </tr>
+                        <tr>
+                            <td>Oct17</td>
+                            <td>Classes up to 1/3</td>
+                        </tr>
+                    <tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">&gt; More</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <form method="get" action="./index-en.html" id="search-box">
+                    <p>Find Calendar:</p>
+                    <p><input name="datetime" type="datetime-local"></p>
+                    <p><input name="time" type="time"></p>
+                    <p><input name="week" type="week"></p>
+                    <input type="submit" value="Find!">
+                </form>
+            </div>
+        </div>
+        <footer>
+            <div id="footer-main">
+                <p>Copyright © National Chung Hsing University</p>
+                <address><p>145 Xingda Rd., South Dist., Taichung City 402, Taiwan (R.O.C.)</p>
+                <p>Tel : 04-22873181 | Email: <a href="mailto:justice@nchu.edu.tw" title="justice@nchu.edu.tw">justice@nchu.edu.tw</a></p>
+                </address>
+            </div>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,212 @@
+@font-face{
+    font-family: 'NotoSans';
+    font-style: normal;
+    font-weight: normal;
+    src: local("NotoSans")，
+         url('https://bpeecs.nchu.edu.tw/assets/fonts/NotoSans-Regular') format("woff"),
+}
+
+*{
+    font-family: 'NotoSans', 'Open Sans', '微軟正黑體', sans-serif;
+}
+
+body{
+    background: linear-gradient(#f6d7d7, #d2d4eb);
+    background-attachment: fixed;
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    color: #444343;
+    width: 100%;
+}
+
+nav{
+    background-color: #303030;
+    box-shadow: 0 0 20px 0 rgba(0,0,0,.7);
+    height: 40px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 10;
+}
+
+nav #nav-main{
+    background-color: inherit;
+    margin: 0px auto;
+    max-width: 1200px;
+    overflow-x: visible;
+    /*overflow-x: auto;*/
+    width: 100%;
+}
+
+nav ul, nav li{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+nav ul{
+    display: flex;
+    min-width: 200px;
+}
+
+nav li{
+    height: 100%;
+    width: auto;
+}
+
+nav a{
+    display: block;
+    height: 100%;
+    padding: 0px 20px;
+    line-height: 40px;
+}
+
+nav .arrow-down{
+    border-color: #f7d272 transparent transparent transparent;
+    border-style: solid;
+    border-width: 3px;
+    display: inline-block;
+    height: 0px;
+    margin-left: 5px;
+    width: 0px;
+}
+
+nav ul a:hover{
+    background-color: #444343;
+    transition: background-color 500ms;
+}
+nav ul > li{
+    position: relative;
+}
+
+nav ul > li:hover > ul{
+    display: flex;
+}
+
+nav ul > li > ul{
+    background-color: #404040;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 40px;
+    left: 0px;
+    width: intrinsic;
+    width: -moz-max-content;
+    width: -webkit-max-content;
+}
+
+@media screen and (max-width: 750px){
+    nav ul li{
+        display: none;
+    }
+
+    nav ul li:last-child{
+        display: block;
+    }
+}
+
+#wrapper{
+    background-color: #e6e6e6;
+    box-shadow: 6px 0px 20px rgba(0,0,0,.7);
+    box-sizing: border-box;
+    margin: 50px auto 10px;
+    max-width: 1200px;
+    padding: 10px;
+    width: 100%;
+    z-index: 5;
+}
+
+#wrapper a{
+    color: #aa8c23;
+    border-bottom: 1px dashed #aa8c23;
+    text-decoration: none;
+    transition: color 500ms, border-bottom 500ms;
+}
+
+#wrapper a:hover{
+    border-bottom: 1px dashed #b7ba14;
+    color: #b7ba14;
+}
+
+footer{
+    background-color: #303030;
+    margin: 0px auto;
+    width: 100%;
+}
+
+footer #footer-main{
+    box-sizing: border-box;
+    color: #fff;
+    margin: 0px auto;
+    max-width: 1200px;
+    padding: 20px 5px;
+    text-align: center;
+    width: 100%;
+}
+
+footer a, nav a{
+    color: #f7d272;
+    text-decoration: none;
+}
+
+footer a:hover, nav a:hover{
+    color: #ffb800;
+    transition: color 500ms;
+}
+
+table caption{
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+th{
+    text-align: center;
+}
+
+thead tr{
+    background-color: #414141;
+    color: #ffb421;
+}
+
+tbody tr:nth-child(2n+1){
+    background-color: #d6d6d6;
+}
+
+tbody tr:nth-child(2n){
+    background-color: transparent;
+}
+
+h1{
+    color: transparent;
+    -webkit-text-stroke: 1px navy;
+    text-stroke: 1px navy;
+}
+
+h2{
+    color: #161616;
+    text-shadow: 2px 2px 3px #505050;
+}
+
+.two-col{
+    column-count: 2;
+    column-gap: 20px;
+    column-rule-style: dashed;
+    column-rule-width: 1px;
+}
+
+.loader{
+    animation: spin 400ms cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    border: 3px solid transparent;
+    border-top: 3px solid #02c5ff;
+    border-radius: 50%;
+    margin: 0px auto;
+    width: 30px;
+    height: 30px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}

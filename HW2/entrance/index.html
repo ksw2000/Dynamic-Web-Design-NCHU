@@ -1,0 +1,150 @@
+<!--
+4107056019 廖柏丞 第二次作業 10/28
+4107056019 Bocheng Liao The Second Homework 10/28
+-->
+<!DOCTYPE html>
+<html style="height: 100%;">
+    <head>
+        <meta charset="utf-8">
+        <title>興大入口 :: 國立中興大學</title>
+        <link rel="stylesheet" type="text/css" href="../src/style/main.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body{
+                background-image: url('../src/img/background.jpg');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                height: 100%;
+            }
+
+            div#login{
+                background-color: rgba(34,34,34,.9);
+                box-sizing: border-box;
+                border-radius: 20px;
+                height: 100%;
+                left: 50%;
+                margin: 0px auto;
+                max-height: 400px;
+                max-width: 500px;
+                overflow-y: auto;
+                padding: 25px 20px;
+                position: fixed;
+                text-align: center;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 100%;
+                z-index: 7;
+            }
+
+            div#login input[type="text"], div#login input[type="password"]{
+                border: 1px solid #fff;
+                border-radius: 5px;
+                background-color: transparent;
+                color: #fff;
+                font-size: 1.1em;
+                line-hegiht: 30px;
+                height: 30px;
+                letter-spacing: 2px;
+                width: 100%;
+                max-width: 250px;
+            }
+
+            div#login input[type="submit"]{
+                border: 1px solid #fff;
+                border-radius: 5px;
+                background-color: transparent;
+                font-wegith: bold;
+                font-size: 1.1em;
+                color: #fff;
+                cursor: pointer;
+                line-hegiht: 35px;
+                height: 35px;
+                width: 100%;
+                max-width: 250px;
+            }
+
+            div#login input[type="submit"]:hover{
+                background-color: #1dbde0;
+                border: 1px solid #1dbde0;
+                color: #fff;
+            }
+
+            div#login input:select{
+                outline: none;
+            }
+
+            div#login a{
+                color: #fff;
+            }
+
+            #photo-from{
+
+                bottom: 0px;
+                color: #fff;
+                padding: 5px;
+                text-align: right;
+                position: absolute;
+                right: 0px;
+                width: 100%;
+            }
+
+            #photo-from span{
+                border-radius: 3px;
+                background-color: rgba(34,34,34,.8);
+                box-sizing: border-box;
+                font-size: 0.8em;
+                padding: 2px 10px;
+            }
+
+            h1{
+                color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <div id="nav-main">
+                <ul>
+                    <li><a href="../index.html">回首頁</a></li>
+                    <li><a href="../about.html">認識興大</a></li>
+                    <li><a href="../academic/index.html">學院<div class="arrow-down"></div></a>
+                        <ul>
+                            <li><a href="../academic/cla.html">文學院</a></li>
+                            <li><a href="../academic/canr.html">農資學院</a></li>
+                            <li><a href="../academic/scie.html">理學院</a></li>
+                            <li><a href="../academic/engineer.html">工學院</a></li>
+                            <li><a href="../academic/lifesci.html">生命科學院</a></li>
+                            <li><a href="../academic/vmc.html">獸醫學院</a></li>
+                            <li><a href="../academic/com.html">管理學院</a></li>
+                            <li><a href="../academic/clp.html">法政學院</a></li>
+                            <li><a href="../academic/eecs.html">電資學院</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../maps.html">網站地圖</a></li>
+                    <li><a href="../entrance/index.html">興大入口</a></li>
+                    <li><a href="../opinion.html">意見調查</a></li>
+                    <li style="margin-left: auto;"><a href="./index-en.html">English</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div id="login">
+            <h1>登入</h1>
+            <form method="post" action="./index.html">
+                <!-- 帳號不允許自動完成以增加安全性 -->
+                <p><input type="text" placeholder="帳號" autofocus="autofocus" autocomplete="off"/></p>
+                <p><input type="password" placeholder="密碼"/></p>
+                <!--配合後端可以實現預防「跨站請求偽造攻擊（CSRF)」-->
+                <input type="hidden" name="token" value="tokentokentoken"/>
+                <p><input type="checkbox" id="keep-login"/><label for="keep-login">保持登入</label></p>
+                <p><a href="./forget-pwd.html">忘記密碼</a> | <a href="./reg.html">校友註冊</a></p>
+                <div><input type="submit" value="登入"/></div>
+            </form>
+        </div>
+
+        <div id="photo-from">
+            <span>背景圖由計資中心提供</span>
+        </div>
+    </body>
+</html>
