@@ -1,0 +1,207 @@
+<!--
+    4107056019 廖柏丞 第三次作業 11/4
+    4107056019 Bocheng Liao The Third Homework 11/4
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Javascript 練習 ── 八數操作</title>
+        <style>
+#main{
+    margin: 0px auto;
+    max-width: 350px;
+    padding: 10px;
+    width: 100%;
+}
+
+input[type='number']{
+    border: 2px solid #505050;
+    box-sizing: border-box;
+    display: block;
+    line-height: 20px;
+    padding: 0px 5px;
+    outline: none;
+    transition: border 500ms;
+    margin: 10px 0px;
+    width: 100%;
+}
+
+input[type='number']:invalid{
+    border: 2px solid #f53535;
+}
+
+button{
+    background-color: inherit;
+    border: 2px solid #505050;
+    border-radius: 3px;
+    cursor: pointer;
+    display: block;
+    margin: 0px auto;
+    width: 50%;
+}
+
+table{
+    border: 1px solid #505050;
+    margin: 10px auto;
+    width: 100%;
+}
+thead tr{
+    background-color: #323333;
+    color: #fff;
+}
+td{
+    border: 1px solid #505050;
+    padding: 3px 5px;
+}
+tr:nth-child(2n){
+    background-color: #ddd;
+}
+        </style>
+    </head>
+    <body>
+        <div id="main">
+            <p>請輸入八個整數 (&lt;1000)</p>
+            <input id="num1" type="number" max="999" step="1">
+            <input id="num2" type="number" max="999" step="1">
+            <input id="num3" type="number" max="999" step="1">
+            <input id="num4" type="number" max="999" step="1">
+            <input id="num5" type="number" max="999" step="1">
+            <input id="num6" type="number" max="999" step="1">
+            <input id="num7" type="number" max="999" step="1">
+            <input id="num8" type="number" max="999" step="1">
+            <button id="calc">計算</button>
+            <div id="result"></div>
+        </div>
+
+        <script type="text/javascript">
+            function List(){
+                var self = this;
+
+                function Element(){
+                    this.num = 0;
+                    this.next = null;
+                }
+
+                this.head = new Element();
+
+                this.push = function(num){
+                    elem = new Element();
+                    elem.num = num;
+                    elem.next = this.head.next;
+                    this.head.next = elem;
+                }
+
+                this.swap = function(pre, a, b){
+                    pre.next = b;
+                    a.next = b.next;
+                    b.next = a;
+                }
+            }
+
+            function isPrime(n){
+                if(n <= 1) return false;
+                var m = n;
+                while(--n > 1){
+                    if(m % n == 0) return false;
+                }
+                return true;
+            }
+
+            function isArmstrong(n){
+                if(n < 0) return false;
+
+                var m = n;
+                var d = (function(num){
+                    digits = 1;
+                    while(num >= 10){
+                        num = Math.floor(num / 10);
+                        digits++;
+                    }
+                    return digits;
+                })(n);
+                for(var i=0; i<digits; i++){
+                    m -= Math.pow(n % 10, d);
+                    n  = Math.floor(n / 10);
+                }
+
+                return m == 0;
+            }
+
+            function isFibonacci(num){
+                if(num < 0) return false;
+
+                var a = 0, b = 1;
+                while(num > b){
+                    b = a + b;  // b = ori_a + ori_b
+                    a = b - a;  // a = ori_b
+                }
+                return b == num || num == 0;
+            }
+
+            document.getElementById("calc").addEventListener('click', function(){
+                var len = 8;
+
+                // Create linked-list based List()
+                var list = new List();
+                for(var i=1; i<=len; i++){
+                    var num = parseInt(document.getElementById('num' + i).value);
+                    if(isNaN(num)){
+                        alert("column" + i + " is not a number");
+                        return;
+                    }
+                    if(num >= 1000){
+                        alert("column" + i + " should be smaller than 1000");
+                        return;
+                    }
+                    list.push(num);
+                }
+
+                // Sorting
+                for(var i=0; i<len-1; i++){
+                    var current = list.head;
+                    for(var j=0; j<len-i-1; j++){
+                        if(current.next.num > current.next.next.num){
+                            list.swap(current, current.next, current.next.next);
+                        }
+                        current = current.next;
+                    }
+                }
+
+                // Generate answer
+                var max, min, median, primeList = "", armstrongList = "", fibonacciList = "", current = list.head.next;
+                for(var i=0; i<len; i++){
+                    if(i == 0){
+                        min = current.num;
+                    }
+                    if(i == 3){
+                        median = (Number(current.num) + Number(current.next.num)) / 2;
+                    }
+                    if(i == len-1){
+                        max = current.num;
+                    }
+                    if(isPrime(current.num)){
+                        primeList += (primeList == "") ? current.num : "、" + current.num;
+                    }
+                    if(isArmstrong(current.num)){
+                        armstrongList += (armstrongList == "") ? current.num : "、" + current.num;
+                    }
+                    if(isFibonacci(current.num)){
+                        fibonacciList += (fibonacciList == "") ? current.num : "、" + current.num;
+                    }
+                    current = current.next;
+                }
+
+                var table = "<table><thead><tr><th>find</th><th>values</th></tr><tbody>";
+                table += "<tr><td>Max</td><td>" + max + "</td></tr>";
+                table += "<tr><td>Min</td><td>" + min + "</td></tr>";
+                table += "<tr><td>Median</td><td>" + median + "</td></tr>";
+                table += "<tr><td>Prime</td><td>" + primeList + "</td></tr>";
+                table += "<tr><td>Armstrong</td><td>" + armstrongList + "</td></tr>";
+                table += "<tr><td>Fibonacci</td><td>" + fibonacciList + "</td></tr>";
+                table += "</tbody></table>";
+                document.getElementById("result").innerHTML = table;
+            }, false);
+        </script>
+    </body>
+</html>
