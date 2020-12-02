@@ -1,0 +1,528 @@
+<!--
+    4107056019 廖柏丞 第 6 次作業 12 / 2
+    4107056019 Bocheng Liao The 6th Homework 12/2
+    session storage : function save()
+    local storage: function save()
+    DOM
+    document.getElementById().innerHTML: function render_entry_list() line241
+    document.getElementById().value: function render_entry_list() line157
+    document.getElementById().style: open_record() line195
+    document.getElementById().addEventListener: window.onload() = function(){} line525
+    document.getElementById().appendChile(): render_entry_list() line348
+    document.getElementsByTagName()[].innerHTML: window.onload() = function(){} line405
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>A small accounting information system</title>
+        <link rel="stylesheet" href="main.css">
+        <script>
+        var demo = {
+            "company": "範例──春融科技公司",
+            "table": "2020年11月分錄",
+            "init_assets": 5000,
+            "init_liabilities": 200,
+            "entry": {
+                "date": "",
+                "account_name": "現金",
+                "debit": "借",
+                "auto_sum": 1,
+                "unit": 1,
+                "number":1
+            }, "entry_list": [{
+                "date":"2020-11-02",
+                "account_name":"應付帳款",
+                "debit":"借",
+                "auto_sum":60,
+                "unit":60,
+                "number":1
+            },{
+                "date":"2020-11-02",
+                "account_name":"現金",
+                "debit":"貸",
+                "auto_sum":60,
+                "unit":60,
+                "number":1
+            },{
+                "date":"2020-11-03",
+                "account_name":"進貨費用",
+                "debit":"借","auto_sum":7700,
+                "unit":70,
+                "number":110
+            },{
+                "date":"2020-11-03",
+                "account_name":"現金",
+                "debit":"貸",
+                "auto_sum":7700,
+                "unit":70,
+                "number":110
+            },{
+                "date":"2020-11-20",
+                "account_name":"應收帳款",
+                "debit":"借",
+                "auto_sum":70000,
+                "unit":70000,
+                "number":1
+            },{
+                "date":"2020-11-20",
+                "account_name":"銷貨收入",
+                "debit":"貸",
+                "auto_sum":70000,
+                "unit":70000,
+                "number":1
+            },{
+                "date":"2020-11-25",
+                "account_name":"現金",
+                "debit":"借",
+                "auto_sum":70000,
+                "unit":70000,
+                "number":1
+            },{
+                "date":"2020-11-25",
+                "account_name":"應收帳款",
+                "debit":"貸",
+                "auto_sum":70000,
+                "unit":70000,
+                "number":1
+            },{
+                "date":"2020-11-30",
+                "account_name":"現金",
+                "debit":"借",
+                "auto_sum":70000,
+                "unit":20000,
+                "number":10
+            },{
+                "date":"2020-11-30",
+                "account_name":"應付薪資",
+                "debit":"貸",
+                "auto_sum":70000,
+                "unit":20000,
+                "number":10
+            }]
+        }
+
+        function Entry(){
+            this.company = "公司名稱";
+            this.table = "表名稱";
+            this.init_assets = 0;
+            this.init_liabilities = 0;
+            this.entry_list = [];
+            this.entry = {
+                date: 0,
+                account_name: '',
+                detail: '',
+                debit: '',
+                auto_sum: 0,
+                unit: 0,
+                number: 0
+            }
+        }
+
+        function save(){
+            window.sessionStorage.setItem('main', JSON.stringify({
+                list: window.table
+            }));
+            window.localStorage.setItem('main', window.sessionStorage.getItem('main'));
+        }
+
+        function load_entry_from_localStorage(){
+            if(window.localStorage.getItem('main')){
+                window.table = JSON.parse(window.localStorage.getItem('main'))['list'];
+            }else{
+                // Auto load demo when first using
+                window.table = [demo];
+                save();
+            }
+        }
+
+        function render_entry_list(){
+            load_entry_from_localStorage();
+            var dom_ul_entry_list = document.getElementById('entry_list');
+            dom_ul_entry_list.innerHTML = '';
+            for(var i=0; i<window.table.length; i++){
+                var li = document.createElement('li');
+                li.innerHTML = window.table[i].company;
+                li.setAttribute('onclick', 'open_record(' + i + ')');
+                dom_ul_entry_list.appendChild(li);
+            }
+
+            var li_add = document.createElement('li');
+            li_add.innerHTML = '+ 新增';
+            li_add.setAttribute('onclick', 'open_add_entry_page()');
+            dom_ul_entry_list.appendChild(li_add);
+        }
+
+        function add_entry(){
+            if(document.getElementById('input_company').value === ''){
+                alert('請填入公司名稱');
+                return;
+            }
+            if(document.getElementById('input_table_name').value === ''){
+                alert('請填入表格名稱');
+                return;
+            }
+
+            var entry = {
+                company: document.getElementById('input_company').value,
+                table: document.getElementById('input_table_name').value,
+                init_assets: parseInt(document.getElementById('input_init_assets').value, 10),
+                init_liabilities: parseInt(document.getElementById('input_init_liabilities').value, 10)
+            };
+
+            if(typeof window.table === 'undefined'){
+                window.table = [entry];
+            }else{
+                window.table.push(entry);
+            }
+
+            window.editing_index = window.table.length - 1;
+
+            save();
+            open_record(window.editing_index);
+            render_entry_list();
+        }
+
+        function delete_entry(){
+            window.table.splice(window.editing_index, 1);
+            save();
+            open_add_entry_page();
+            render_entry_list();
+        }
+
+        function open_record(index){
+            window.editing_index = index;
+            document.getElementById('add_entry').style.display = "none";
+            document.getElementById('add_record').style.display = "block";
+            render_table();
+        }
+
+        function open_add_entry_page(){
+            document.getElementById('add_entry').style.display = "block";
+            document.getElementById('add_record').style.display = "none";
+        }
+
+        function add_record(){
+            if(!document.getElementById('add_record_date').value){
+                alert('請選擇日期');
+                return;
+            }
+            window.table[window.editing_index].entry = {
+                date: document.getElementById('add_record_date').value,
+                account_name: document.getElementById('add_record_account_name').value,
+                debit: document.getElementById('add_record_debit').value,
+                auto_sum: 0,
+                unit: Number(document.getElementById('add_record_unit').value),
+                number: Number(document.getElementById('add_record_number').value)
+            }
+            window.table[window.editing_index].entry.auto_sum = window.table[window.editing_index].entry.unit;
+            window.table[window.editing_index].entry.auto_sum *= window.table[window.editing_index].entry.number;
+
+            if(window.table[window.editing_index].entry_list){
+                window.table[window.editing_index].entry_list.push(window.table[window.editing_index].entry);
+            }else{
+                window.table[window.editing_index].entry_list = [];
+                window.table[window.editing_index].entry_list[0] = window.table[window.editing_index].entry;
+            }
+
+            save();
+            render_table();
+        }
+
+        function del_record(index){
+            window.table[window.editing_index].entry_list.splice(index, 1);
+            save();
+            render_table();
+        }
+
+        function render_table(){
+            var current_table = window.table[window.editing_index];
+            var current = current_table.entry_list;
+            document.getElementById('record_show_company_name').innerHTML = current_table.company;
+            document.getElementById('record_show_table_name').innerHTML = current_table.table;
+
+            // reset!
+            document.getElementById('record_reload').innerHTML = '';
+            document.getElementById('record_result').innerHTML = '';
+
+            if(typeof current === 'undefined') return;
+
+            // sorting
+            current.sort(function(a, b){
+                var x = new Date(a.date);
+                var y = new Date(b.date);
+                if(x > y){
+                    return 1;
+                }else if(x < y){
+                    return -1;
+                }
+                if(a.debit === b.debit) return 0;
+                return (a.debit == "貸")? 1 : -1;
+            })
+
+            // render main table
+            var dr_sum = 0, cr_sum = 0;
+            var assets_sum = 0, liabilities_sum = 0;
+            var revenue_sum = 0, expenses_sum = 0;
+
+            for(var i=0; i<current.length; i++){
+                var tr = document.createElement('tr');
+                var td_date = document.createElement('td');
+                td_date.innerHTML = current[i].date;
+                var td_account_name = document.createElement('td');
+                if(current[i].debit == "貸"){
+                    td_account_name.classList.add('indent');
+                    cr_sum += current[i].auto_sum;
+                    switch(current[i].account_name){
+                        case "現金":
+                        case "應收帳款":
+                        case "應收票據":
+                        case "存貨":
+                        case "設備":
+                            assets_sum -= current[i].auto_sum;
+                            break;
+                        case "應付帳款":
+                        case "應付薪資":
+                        case "應付費用":
+                        case "預收收入":
+                            liabilities_sum += current[i].auto_sum;
+                            break;
+                        case "銷貨收入":
+                            revenue_sum += current[i].auto_sum;
+                            break;
+                        case "進貨費用":
+                        case "薪資費用":
+                            expenses_sum -= current[i].auto_sum;
+                            break;
+                    }
+                }else{
+                    dr_sum += current[i].auto_sum;
+                    switch(current[i].account_name){
+                        case "現金":
+                        case "應收帳款":
+                        case "應收票據":
+                        case "存貨":
+                        case "設備":
+                            assets_sum += current[i].auto_sum;
+                            break;
+                        case "應付帳款":
+                        case "應付薪資":
+                        case "應付費用":
+                        case "預收收入":
+                            liabilities_sum -= current[i].auto_sum;
+                            break;
+                        case "銷貨收入":
+                            revenue_sum -= current[i].auto_sum;
+                            break;
+                        case "進貨費用":
+                        case "薪資費用":
+                            expenses_sum += current[i].auto_sum;
+                            break;
+                    }
+                }
+                td_account_name.innerHTML = current[i].account_name;
+                var td_sum = document.createElement('td');
+                td_sum.innerHTML = current[i].auto_sum;
+                td_sum.setAttribute('class', 'dollar');
+                var td_unit = document.createElement('td');
+                td_unit.innerHTML = current[i].unit;
+                td_unit.setAttribute('class', 'dollar');
+                var td_number = document.createElement('td');
+                td_number.innerHTML = current[i].number;
+                tr.appendChild(td_date);
+                tr.appendChild(td_account_name);
+                var td_empty = document.createElement('td');
+                if(current[i].debit == "借"){
+                    tr.appendChild(td_sum);
+                    tr.appendChild(td_empty);
+                }else{
+                    tr.appendChild(td_empty);
+                    tr.appendChild(td_sum);
+                }
+                tr.appendChild(td_unit);
+                tr.appendChild(td_number);
+                var td_action = document.createElement('td');
+                td_action.innerHTML = '<a href="javascript:void(0)" onclick="del_record( '+
+                i +' )">移除</a>';
+                tr.appendChild(td_action);
+                document.getElementById('record_reload').appendChild(tr);
+            }
+
+            // render record_result
+            var tr = document.createElement('tr');
+            tr.setAttribute('class', 'result');
+            var td_date = document.createElement('td');
+            var td_account_name = document.createElement('td');
+            td_account_name.style.textAlign = 'right';
+            if(dr_sum != cr_sum){
+                td_account_name.style.color = '#ff664a';
+                td_account_name.innerHTML = '警告：借貸未守恆！';
+            }else{
+                td_account_name.innerHTML = '合計：';
+            }
+            var td_sum_dr = document.createElement('td');
+            td_sum_dr.innerHTML = dr_sum;
+            td_sum_dr.setAttribute('class', 'result dollar');
+            var td_sum_cr = document.createElement('td');
+            td_sum_cr.innerHTML = cr_sum;
+            td_sum_cr.setAttribute('class', 'result dollar');
+            var td_unit = document.createElement('td');
+            var td_number = document.createElement('td');
+            var td_action = document.createElement('td');
+            tr.appendChild(td_date);
+            tr.appendChild(td_account_name);
+            tr.appendChild(td_sum_dr);
+            tr.appendChild(td_sum_cr);
+            tr.appendChild(td_unit);
+            tr.appendChild(td_number);
+            tr.appendChild(td_action);
+            document.getElementById('record_result').appendChild(tr);
+
+            // render statistics
+            document.getElementById('statistics-init-assets').innerHTML =
+            current_table.init_assets;
+            document.getElementById('statistics-init-liabilities').innerHTML =
+            current_table.init_liabilities;
+            document.getElementById('statistics-final-assets').innerHTML =
+            current_table.init_assets + assets_sum;
+            document.getElementById('statistics-final-liabilities').innerHTML =
+            current_table.init_liabilities + liabilities_sum;
+            document.getElementById('statistics-revenue').innerHTML =
+            revenue_sum;
+            document.getElementById('statistics-expenses').innerHTML =
+            expenses_sum;
+        }
+
+        function refresh_auto_sum(){
+            var unit = Number(document.getElementById('add_record_unit').value);
+            var number = Number(document.getElementById('add_record_number').value);
+            if(unit === undefined) unit = 1;
+            if(number === undefined) number = 1;
+            document.getElementById('add_record_auto_sum').innerHTML = unit*number;
+        }
+
+        window.onload = function(){
+            document.getElementsByTagName('body')[0].innerHTML = `
+                <div id="edit_entry">
+                    <ul id="entry_list"></ul>
+                </div>
+                <div id="wrapper">
+                    <div id="add_entry">
+                        <h1>新增表格</h1>
+                        <p><span class="input-label">公司名稱：</span><input type="text" id="input_company" placeholder="某某科技公司"></p>
+                        <p><span class="input-label">表名稱：</span><input type="text" id="input_table_name" placeholder="2020年12月分錄"></p>
+                        <p><span class="input-label">期初資產：</span><input type="text" id="input_init_assets" placeholder="500000"></p>
+                        <p><span class="input-label">期初負債：</span><input type="text" id="input_init_liabilities" placeholder="25000"></p>
+                        <button onclick="add_entry()" class="center">新增分錄表</button>
+                    </div>
+
+                    <div id="add_record" style="display: none;">
+                        <h2 id="record_show_company_name"></h2>
+                        <h3 id="record_show_table_name"></h3>
+                        <div style="width: 100%; overflow-x: auto;">
+                            <table id="record_table">
+                                <thead>
+                                    <tr>
+                                        <th>日期</th>
+                                        <th>科目</th>
+                                        <th>借方 Dr.</th>
+                                        <th>貸方 Cr.</th>
+                                        <th>單價</th>
+                                        <th>數量</th>
+                                        <th>動作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="record_reload">
+                                </tbody>
+                                <tbody>
+                                    <tr id="tr_add_record">
+                                        <td><input type="date" id="add_record_date" style="width: 160px;"></td>
+                                        <td>
+                                            <select id="add_record_account_name">
+                                                <optgroup label="資產">
+                                                    <option value="現金">現金</option>
+                                                    <option value="應收帳款">應收帳款</option>
+                                                    <option value="應收票據">應收票據</option>
+                                                    <option value="存貨">存貨</option>
+                                                    <option value="設備">設備</option>
+                                                </optgroup>
+                                                <optgroup label="負債">
+                                                    <option value="應付帳款">應付帳款</option>
+                                                    <option value="應付薪資">應付薪資</option>
+                                                    <option value="應付費用">應付費用</option>
+                                                    <option value="預收收入">預收收入</option>
+                                                </optgroup>
+                                                <optgroup label="權益">
+                                                    <option value="銷貨收入">銷貨收入</option>
+                                                    <option value="進貨費用">進貨費用</option>
+                                                    <option value="薪資費用">薪資費用</option>
+                                                </optgroup>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select id="add_record_debit" style="max-width: 50px;">
+                                                <option value="借">借</option>
+                                                <option value="貸">貸</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <span id="add_record_auto_sum" class="dollar">0</span>
+                                        </td>
+                                        <td>
+                                            <input type="number" min="0"  id="add_record_unit"
+                                            onchange="refresh_auto_sum()" onkeyup="refresh_auto_sum()" value="1">
+                                        </td>
+                                        <td>
+                                            <input type="number" min="1"  id="add_record_number"
+                                            onchange="refresh_auto_sum()" onkeyup="refresh_auto_sum()" value="1">
+                                        </td>
+                                        <td>
+                                            <a href="javascript: void(0);" onclick="add_record()">新增</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tbody id="record_result">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="table_statistics">
+                            <div>
+                                <p>期初資產：<span id="statistics-init-assets" class="dollar"></span></p>
+                                <p>期初負債：<span id="statistics-init-liabilities" class="dollar"></span></p>
+                                <p>期末資產：<span id="statistics-final-assets" class="dollar"></span></p>
+                                <p>期末負債：<span id="statistics-final-liabilities" class="dollar"></span></p>
+                                <p>收入合計：<span id="statistics-revenue" class="dollar"></span></p>
+                                <p>費損合計：<span id="statistics-expenses" class="dollar"></span></p>
+                            </div>
+                            <div>
+                                <p>功能說明</p>
+                                <ol>
+                                    <li>依分錄方式記帳</li>
+                                    <li>表格自動按照日期及借貸排序</li>
+                                    <li>日期若未填寫，將會顯示錯誤</li>
+                                    <li>借貸未平衡，將會顯示警告</li>
+                                    <li>分錄表會自動儲存於 local storage</li>
+                                </ol>
+                            </div>
+                            <div>
+                                <p>借貸法則參考</p>
+                                <ol>
+                                    <li>資產增加記借方，資產減少記貸方</li>
+                                    <li>負債增加記貸方，負債減少記借方</li>
+                                    <li>收益增加記貸方，收益減少記借方</li>
+                                    <li>費損增加記借方，費損減少記貸方</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <hr>
+                        <button id="btn-delete-entry" class="center">刪除表格</button>
+                    </div>
+                </div>
+            `;
+            render_entry_list();
+            document.getElementById('btn-delete-entry').addEventListener('click', function(){delete_entry()});
+        }
+        </script>
+    </head>
+    <body></body>
+</html>
